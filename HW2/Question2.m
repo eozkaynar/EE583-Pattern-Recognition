@@ -1,4 +1,4 @@
-%% Question 2 %% Bayesian Parameter Estimation:
+%% Question 2 %% Bayesian Parameter Estimation
 rng('default') % For reproducibility
 
 sigma = 0.7;
@@ -16,7 +16,6 @@ figure;
 gscatter(x_i, y, group, 'br', '.',18);
 
 % Maximum Likelihood Estimation
-
 mean_estimator_i = sum(x_i)/N_25;
 
 %ii)
