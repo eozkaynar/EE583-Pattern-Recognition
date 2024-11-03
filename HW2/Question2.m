@@ -1,11 +1,13 @@
+clear; clc; close all;
+
 %% Question 2 %% Bayesian Parameter Estimation
 rng('default') % For reproducibility
 
-sigma = 0.7;
+sigma   = 0.7;
 % i)
 mu1     = 3;
 N_25    = 25;
-x_i     = normrnd(mu1,sigma,[N_25,1]);
+x_i     = normrnd(mu1,sqrt(sigma),[N_25,1]);
 
 
 % define values for y-axis
@@ -14,6 +16,8 @@ group   = ones(length(x_i), 1);  % All samples in one group
 % Plot
 figure;
 gscatter(x_i, y, group, 'br', '.',18);
+title('Scatter Plot of Normal Distribution for 25 samples');
+xlabel("x")
 
 % Maximum Likelihood Estimation
 mean_estimator_i = sum(x_i)/N_25;
@@ -22,8 +26,8 @@ mean_estimator_i = sum(x_i)/N_25;
 mu_mu       = 2.8; % mean parameter of random variable mean
 sigma_mu    = .8; % variance parameter of random variable mean
 
-w1_ii       = (N_25*sigma_mu^2)/(N_25*sigma_mu^2 + sigma^2);
-w2_ii       = (sigma^2)/(N_25*sigma_mu^2 + sigma^2);
+w1_ii       = (N_25*sigma_mu )/(N_25*sigma_mu  + sigma );
+w2_ii       = (sigma )/(N_25*sigma_mu  + sigma );
 
 mu_map_ii   = w1_ii * mean_estimator_i + w2_ii * mu_mu;
     
@@ -38,13 +42,15 @@ group   = ones(length(x_iii), 1);  % All samples in one group
 % Plot
 figure;
 gscatter(x_iii, y, group, 'br', '.',18);
+title('Scatter Plot of Normal Distribution for 1000 samples');
+xlabel("x")
 
 % Maximum Likelihood Estimation
 mean_estimator_iii = sum(x_iii)/N_1000;
 
 % MAP Estimation
-w1_iii          = (N_1000*sigma_mu^2)/(N_1000*sigma_mu^2 + sigma^2);
-w2_iii          = (sigma^2)/(N_1000*sigma_mu^2 + sigma^2);
+w1_iii          = (N_1000*sigma_mu )/(N_1000*sigma_mu  + sigma );
+w2_iii          = (sigma )/(N_1000*sigma_mu  + sigma );
 
 mu_map_iii      = w1_iii*mean_estimator_iii + w2_iii * mu_mu; % Prior infoya daha yakın yorum yazarken aklında bulundurursun kıps :D
 

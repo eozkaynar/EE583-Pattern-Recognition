@@ -1,3 +1,5 @@
+clear; clc; close all;
+
 %% Question 1 %% Maximum Likelihood
 
 rng('default')  % For reproducibility
@@ -9,9 +11,11 @@ Sigma1  = [.5 .3 ; .3 .8];
 X_10 = mvnrnd(mu1,Sigma1,10);
 
 % % Visualize the data
-% figure;
-% plot(X_10(:,1),X_10(:,2),'+')
-% title('Scatter Plot of Bivariate Normal Distribution for 10 samples');
+figure;
+plot(X_10(:,1),X_10(:,2),'+')
+title('Scatter Plot of Normal Distribution for 10 samples');
+xlabel('x1')
+ylabel('x2')
 
 % Maximum likelihood estimation for 10 samples
 
@@ -30,10 +34,12 @@ varience_estimator_10 = outer_product1/N_10;
 % Maximum likelihood estimation for 1000 samples
 X_1000 = mvnrnd(mu1,Sigma1,1000);
 
-% % Visualize the data
-% figure;
-% plot(X_1000(:,1),X_1000(:,2),'+')
-% title('Scatter Plot of Bivariate Normal Distribution for 1000 samples');
+% Visualize the data
+figure;
+plot(X_1000(:,1),X_1000(:,2),'+')
+title('Scatter Plot of Normal Distribution for 1000 samples');
+xlabel('x1')
+ylabel('x2')
 
 N_1000               = size(X_1000,1);    % Number of samples
 mean_estimator_1000  = sum(X_1000,1)/N_1000;   % Summing along the first dimension (rows)
