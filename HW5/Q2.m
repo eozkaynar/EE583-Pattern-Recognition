@@ -21,10 +21,8 @@ Y2 = Y(idxY2);
 weak_learner = templateTree("MaxNumSplits",1);
 % First half of the observation
 Mdl = fitcensemble(X1,Y1,'Method','AdaBoostM2','NumLearningCycles',25,'Learners',weak_learner);
-
-
-
-predMeanX = predict(Mdl,mean(X));
+% Plot the tree
+view(Mdl.Trained{1},'Mode','graph')
 
 % Predict the labels from second half of the data using ensemble model
 PredictYensemble = predict(Mdl,X2);

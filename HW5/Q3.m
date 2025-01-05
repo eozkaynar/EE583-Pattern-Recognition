@@ -17,8 +17,9 @@ X1 = X(idxX1, :);
 Y1 = Y(idxY1);
 X2 = X(idxX2, :);
 Y2 = Y(idxY2);
+% rng(100);
 
-Mdl = TreeBagger(25,X1,Y1,'SampleWithReplacement','on');
+Mdl = TreeBagger(25,X1,Y1,'SampleWithReplacement','on','OOBPrediction',"on","Method","classification");
 
 view(Mdl.Trees{1},'Mode','graph')
 %Prediction 
@@ -27,6 +28,7 @@ PredictYensemble = predict(Mdl,X2);
 
 % Predict the labels from second half of the data using first tree
 PredictYfirsttree = predict(Mdl.Trees{1},X2);
+
 
 % Calculate classification accuracy for both
 accuracyEnsemble    = 0;
@@ -40,3 +42,7 @@ accuracyFirstTree = accuracyFirstTree / numel(Y2);
 % Display classification accuracies
 disp(['Accuracy of AdaBoost ensemble: ', num2str(accuracyEnsemble)]);
 disp(['Accuracy of the first tree: ', num2str(accuracyFirstTree)]);
+
+plot(oobError(Mdl))
+xlabel("Number of Grown Trees")
+ylabel("Out-of-Bag Classification Error")
